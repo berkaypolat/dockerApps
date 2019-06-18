@@ -1,0 +1,15 @@
+GOAL:
+1 - Run a nginx, mysql, and httpd(apache) server
+2 - Run all of them with --detach and --name
+3 - nginx should listen on 80:80, mysql 3306:3306, httpd 8080:80
+4 - use -e MYSQL_RANDOM_ROOT_PASSWORD=yes as an environment variable for mysql
+5 - use docker container logs to find the random password
+6 - clean all running containers
+
+CL commands:
+> docker container run -d -p 3306:3306 --name mysql -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
+> docker container run -d -p 80:80 --name nginx nginx
+> docker container run -d -p 8080:80 --name httpd httpd
+> docker container logs mysql
+> docker container stop id#, id#, id#
+> docker container rm mysql httpd nginx
