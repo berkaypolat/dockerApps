@@ -1,0 +1,18 @@
+GOAL:
+1-Take existing node.js and Dockerize it
+2-Make Dockerfile. Build it. Test it. Push it. (rm it). Run it.
+3-Details in deockerfile-assignment-1/Dockerfile
+4-Use the Alpine version of the official 'node' 6.x image
+5-Expected result is web site at http://localhost
+6-Tag and push to your Docker Hub account
+7-Remove image from local cache and run again from Docker Hub
+
+SOLUTION:
+1 - The final edited Dockerfile can be found in the same directory.
+#CLI
+> docker image build -t testnode .
+> docker container run --rm -p 80:3000 testnode
+> docker image tag testnode berkayp/testing-node
+> docker push berkayp/testing-node
+> docker image rm berkayp/testing-node
+> docker container run --rm -p 80:3000 berkayp/testing-node
