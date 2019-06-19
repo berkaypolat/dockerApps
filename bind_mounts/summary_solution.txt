@@ -1,0 +1,6 @@
+GOAL:
+1 - use a jekyll "static site generator" to start a local web server
+2 - source code is in the course repo under bindmount-sample-1
+3 - edit files with any editor on our host machine using native tools
+4 - container detect changes with host files and updates web server
+5 - start container with "docker run -p 80:4000 -v $(pwd):/site bretfisher/jekyll-serve"

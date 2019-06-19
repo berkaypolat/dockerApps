@@ -1,0 +1,15 @@
+GOAL:
+1-create a postgres container with named volume psql-data using version 9.6.1
+2-use docker hub to learn VOLUME path and versions needed to run it
+3-check logs, stop container
+4-create a new postgres container with same named volume using 9.6.2
+5-chech logs to validate
+
+SOLUTION:
+> docker container run -d --name psql -v psql:/var/lib/postgresql/data postgres:9.6.1
+> docker container logs -f psql
+> docker container stop psql
+> docker container run -d --name psql2 -v psql:/var/lib/postgresql/data postgres:9.6.2
+> docker container ls -a
+> docker container logs psql2
+> docker volume ls
