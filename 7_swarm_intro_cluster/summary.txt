@@ -1,0 +1,63 @@
+SWARM MODE MOTIVES:
+- How do we automate container lifecycle?
+- How can we easily scale out/in/up/down
+- How we can we replace containers without downtime (blue/green deploy)?
+- How we we can control/track where containers get started?
+- Creating cross-node virtual networks? ensuring trusted servers run our containers? Or
+  how can we store secrets, keys, etc and get them to the right container?
+
+==== Swarm Mode: Built-In Orchestration =====
++ Server clustering solution built inside Docker
++ Not related to Swarm "classic"
++ New commands are enabled with Swarm Mode
++ The whole container orchestration system is handled by the Swarm Mode
+
+=== Create Your First Service and Scale It Locally ===
+> docker info (to check swarm inactive)
+> docker swarm init
+        ~ PKI and security automation
+        ~ Raft database created to store root CA, configs and secrets
+> docker node ls  (shows one manager node on local)
+> docker node --help
+> docker service --help (replaces the docker run command)
+> docker service create alpine ping 8.8.8.8  (returns a service ID)
+> docker service ls
+> docker service ps <service_name> (shows us the tasks/containers of the service!)
+> docker container ls
+> docker service update <service_name/id> --replicas 3
+> docker service ls
+> docker service ps <service_name>
+> docker container ls
+> docker container rm -f <service_name>.1.<ID>
+> docker service ls
+> docker service ps <service_name>
+> docker service rm <service_name>
+> docker service ls  (should be empty)
+> docker container ls (should be empty)
+
+==== Creating a 3-Node Swarm Cluster =====
+~ Different ways to implement this part ~
++ play-with-docker.com can be used for this part
++ docker-machine + VirtualBox
++ Digital Ocean + Docker install
++ Roll your own
+# I went with play-with-docker.com option
+@(node1)
+> docker swarm init --advertise-addr <public IP address>
+@(node2)
+- copy and paste the docker swarm join command from node1
+- workers cant use swarm commands
+@(node1)
+> docker node ls
+> docker node update --role manager node2
+> docker node ls
+> docker swarm join-token manager  (gets the token for manager role)
+@(node3)
+- copy and paste the token0 manager to node3 terminal
+@(node1)
+> docker node ls (now we have 3 managers)
+> docker service create --replicas 3 alpine 8.8.8.8
+> docker service ls
+> docker node ps
+> docker node ps node2 (shows the containers run on node2)
+> docker service ps <name>

@@ -1,0 +1,31 @@
+WHY DOCKER COMPOSE?
+1 - Configure relationships between containers
+2 - Save our docker container run settings in easy-to-read file
+3 - Create one-liner developer environment startups
+4 - YAML-formatted file and CLI tool docker-compose
+====================
+- YAML file can be used with docker-compose command for local docker automation
+====================
+-- docker-compose CLI --
+   - not a production-grade tool but ideal for local development and test
+   - docker-compose up & docker-compose down ~ 2 most common apps
+    > cd compose-sample-2
+    > docker-compose up
+    > docker-compose ps
+    > docker-compose top
+    > docker-compose down
+======================
+-- Using Compose to Build Images --
++ we can also build custom images
++ docker-compose up OR docker-compose build (for rebuild)
++ great for complex builds that have lots of vars or build args
+
+  > cd compose-sample-3
+  > docker-compose up
+  > docker-compose down
+  > docker image rm nginx-custom
+  (delete 'image: nginx-custom in the yaml file)
+  > docker-compose up -d
+  > docker images ls
+  > docker-compose down --rmi local
+=====================
